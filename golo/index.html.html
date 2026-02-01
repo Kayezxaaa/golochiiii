@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You</title>
+
+<style>
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;
+}
+
+/* Background */
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hidden checkbox (controls transition) */
+#open {
+  display: none;
+}
+
+/* Card container */
+.card {
+  width: 320px;
+  height: 220px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  cursor: pointer;
+  perspective: 1000px;
+  position: relative;
+}
+
+/* Front cover */
+.front {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  transition: transform 1s ease;
+  transform-origin: left;
+}
+
+/* Letter inside */
+.letter {
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+  color: #444;
+  opacity: 0;
+  transition: opacity 1s ease 0.6s;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Open animation */
+#open:checked + label .front {
+  transform: rotateY(-160deg);
+}
+
+#open:checked + label .letter {
+  opacity: 1;
+}
+
+/* Small hint */
+.hint {
+  position: absolute;
+  bottom: -30px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<input type="checkbox" id="open">
+
+<label for="open">
+  <div class="card">
+    <div class="front">
+      Tap to Open 💌
+    </div>
+
+    <div class="letter">
+      <p>
+        Hi.<br><br>
+        Hi Golo it's me again i know this a little weird but, 
+        i been wanting to tell you that i like you 
+        since the very first time i saw you. 
+        and saw your beatiful smile, your smile made my heart
+        flutter and it was the most beatiful thing i've ever seen
+        you were the best thing that ever happened to me <br><br>
+
+        This isn’t meant to pressure you or expect anything.
+        I just wanted to be honest—because some feelings deserve
+        to be said at least once.<br><br>
+
+        Take care, always.
+      </p>
+    </div>
+  </div>
+</label>
+
+<div class="hint">click the card</div>
+
+</body>
+</html>
