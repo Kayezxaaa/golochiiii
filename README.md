@@ -5,15 +5,13 @@
 <title>For You</title>
 
 <style>
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Georgia', serif;
+  font-family: Georgia, serif;
 }
 
-/* Background */
 body {
   height: 100vh;
   background: linear-gradient(135deg, #ffdde1, #ee9ca7);
@@ -23,52 +21,55 @@ body {
   flex-direction: column;
 }
 
-/* Hidden checkbox */
 #open {
   display: none;
 }
 
-/* Card container */
+/* Card */
 .card {
   width: 320px;
-  height: 220px;
+  height: 200px;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-  cursor: pointer;
-  perspective: 1000px;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
   position: relative;
+  perspective: 1200px;
+  transition: height 0.8s ease;
   overflow: hidden;
 }
 
-/* Front cover */
+/* Expand card when opened */
+#open:checked + label .card {
+  height: 360px;
+}
+
+/* Front */
 .front {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: white;
   font-size: 1.2rem;
-  letter-spacing: 1px;
   transition: transform 1s ease;
   transform-origin: left;
   backface-visibility: hidden;
   z-index: 2;
 }
 
-/* Letter container */
+/* Letter */
 .letter {
   position: absolute;
   inset: 0;
-  padding: 18px;
+  padding: 22px;
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: #444;
-  font-size: 0.9rem;
-  line-height: 1.5;
   opacity: 0;
-  transition: opacity 1s ease 0.6s;
+  transition: opacity 0.6s ease 0.5s;
 }
 
 /* Pages */
@@ -81,23 +82,24 @@ body {
 
 .page {
   width: 50%;
-  padding-right: 10px;
 }
 
-/* Navigation buttons */
+/* Buttons */
 .nav {
   position: absolute;
-  bottom: 10px;
-  right: 15px;
-  font-size: 0.75rem;
+  bottom: 14px;
+  font-size: 0.8rem;
   color: #ff758c;
   cursor: pointer;
   user-select: none;
 }
 
+.next {
+  right: 20px;
+}
+
 .back {
-  right: auto;
-  left: 15px;
+  left: 20px;
   display: none;
 }
 
@@ -110,9 +112,8 @@ body {
   opacity: 1;
 }
 
-/* Hint */
 .hint {
-  margin-top: 15px;
+  margin-top: 14px;
   font-size: 0.8rem;
   color: #555;
 }
@@ -126,25 +127,21 @@ body {
 <label for="open">
   <div class="card">
 
-    <div class="front">
-      Tap to Open 💌
-    </div>
+    <div class="front">Tap to Open 💌</div>
 
     <div class="letter">
       <div class="pages" id="pages">
 
-        <!-- PAGE 1 -->
         <div class="page">
           <p>
             Hi.<br><br>
             Hi Golo, it’s me again. I know this is a little weird, but  
             I’ve been wanting to tell you that I like you since the very first time I saw you.  
-            When I saw your beautiful smile, my heart fluttered—  
-            it was one of the most beautiful things I’ve ever seen.
+            When I saw your beautiful smile, my heart fluttered—it was one of the most beautiful
+            things I’ve ever seen.
           </p>
         </div>
 
-        <!-- PAGE 2 -->
         <div class="page">
           <p>
             You became one of the best things that ever happened to me.<br><br>
@@ -157,8 +154,8 @@ body {
 
       </div>
 
-      <div class="nav back" id="backBtn">← Back</div>
-      <div class="nav next" id="nextBtn">Next →</div>
+      <div class="nav back" id="back">← Back</div>
+      <div class="nav next" id="next">Next →</div>
     </div>
 
   </div>
@@ -168,14 +165,11 @@ body {
 
 <script>
 const pages = document.getElementById("pages");
-const next = document.getElementById("nextBtn");
-const back = document.getElementById("backBtn");
-
-let page = 0;
+const next = document.getElementById("next");
+const back = document.getElementById("back");
 
 next.onclick = (e) => {
   e.stopPropagation();
-  page = 1;
   pages.style.transform = "translateX(-50%)";
   next.style.display = "none";
   back.style.display = "block";
@@ -183,7 +177,6 @@ next.onclick = (e) => {
 
 back.onclick = (e) => {
   e.stopPropagation();
-  page = 0;
   pages.style.transform = "translateX(0)";
   next.style.display = "block";
   back.style.display = "none";
@@ -192,4 +185,3 @@ back.onclick = (e) => {
 
 </body>
 </html>
-
