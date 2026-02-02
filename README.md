@@ -1,4 +1,4 @@
-<html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -20,9 +20,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
-/* Hidden checkbox (controls transition) */
+/* Hidden checkbox */
 #open {
   display: none;
 }
@@ -37,6 +38,7 @@ body {
   cursor: pointer;
   perspective: 1000px;
   position: relative;
+  overflow: hidden;
 }
 
 /* Front cover */
@@ -53,18 +55,50 @@ body {
   letter-spacing: 1px;
   transition: transform 1s ease;
   transform-origin: left;
+  backface-visibility: hidden;
+  z-index: 2;
 }
 
-/* Letter inside */
+/* Letter container */
 .letter {
   position: absolute;
   inset: 0;
-  padding: 20px;
+  padding: 18px;
   color: #444;
+  font-size: 0.9rem;
+  line-height: 1.5;
   opacity: 0;
   transition: opacity 1s ease 0.6s;
-  font-size: 0.95rem;
-  line-height: 1.5;
+}
+
+/* Pages */
+.pages {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  transition: transform 0.6s ease;
+}
+
+.page {
+  width: 50%;
+  padding-right: 10px;
+}
+
+/* Navigation buttons */
+.nav {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 0.75rem;
+  color: #ff758c;
+  cursor: pointer;
+  user-select: none;
+}
+
+.back {
+  right: auto;
+  left: 15px;
+  display: none;
 }
 
 /* Open animation */
@@ -76,12 +110,9 @@ body {
   opacity: 1;
 }
 
-/* Small hint */
+/* Hint */
 .hint {
-  position: absolute;
-  bottom: -30px;
-  width: 100%;
-  text-align: center;
+  margin-top: 15px;
   font-size: 0.8rem;
   color: #555;
 }
@@ -94,31 +125,71 @@ body {
 
 <label for="open">
   <div class="card">
+
     <div class="front">
       Tap to Open 💌
     </div>
 
     <div class="letter">
-      <p>
-        Hi.<br><br>
-        Hi Golo it's me again i know this a little weird but, 
-        i been wanting to tell you that i like you 
-        since the very first time i saw you. 
-        and saw your beatiful smile, your smile made my heart
-        flutter and it was the most beatiful thing i've ever seen
-        you were the best thing that ever happened to me  <br><br>
+      <div class="pages" id="pages">
 
-        This isn’t meant to pressure you or expect anything.
-        I just wanted to be honest—because some feelings deserve
-        to be said at least once.<br><br>
+        <!-- PAGE 1 -->
+        <div class="page">
+          <p>
+            Hi.<br><br>
+            Hi Golo, it’s me again. I know this is a little weird, but  
+            I’ve been wanting to tell you that I like you since the very first time I saw you.  
+            When I saw your beautiful smile, my heart fluttered—  
+            it was one of the most beautiful things I’ve ever seen.
+          </p>
+        </div>
 
-        Take care, always.
-      </p>
+        <!-- PAGE 2 -->
+        <div class="page">
+          <p>
+            You became one of the best things that ever happened to me.<br><br>
+            This isn’t meant to pressure you or expect anything.  
+            I just wanted to be honest—because some feelings deserve  
+            to be said at least once.<br><br>
+            Take care, always.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="nav back" id="backBtn">← Back</div>
+      <div class="nav next" id="nextBtn">Next →</div>
     </div>
+
   </div>
 </label>
 
-<div class="hint">click the card</div>
+<div class="hint">Click the card</div>
+
+<script>
+const pages = document.getElementById("pages");
+const next = document.getElementById("nextBtn");
+const back = document.getElementById("backBtn");
+
+let page = 0;
+
+next.onclick = (e) => {
+  e.stopPropagation();
+  page = 1;
+  pages.style.transform = "translateX(-50%)";
+  next.style.display = "none";
+  back.style.display = "block";
+};
+
+back.onclick = (e) => {
+  e.stopPropagation();
+  page = 0;
+  pages.style.transform = "translateX(0)";
+  next.style.display = "block";
+  back.style.display = "none";
+};
+</script>
 
 </body>
 </html>
+
